@@ -34,18 +34,18 @@ end
 
 # We can execute a gateway action type and pattern match for succinct error handling.
 puts "Exhaustive matching against ok \"it worked\" calling `#do`"
-puts case a = MyGateway.new("it worked").do
-in Ok
+puts case MyGateway.new("it worked").do
+in Ok => a
   a.unwrap
-in Err
-  a.unwrap_err
+in Err => e
+  e.unwrap_err
 end
 
 # We can execute a gateway action type and pattern match for succinct error handling.
 puts "Exhaustive matching against error \"it worked\" calling `#do_err`"
-puts case a = MyGateway.new("it worked").do_err
-in Ok
+puts case MyGateway.new("it worked").do_err
+in Ok => a
   a.unwrap
-in Err
-  a.unwrap_err
+in Err => e
+  e.unwrap_err
 end
